@@ -35,6 +35,13 @@ defmodule ExPlay.Request.Base do
         auth: "https://android.clients.google.com/auth"
       }
 
+      @regex %{
+        auth: %{
+          error:   ~r/Error=(\w+)/,
+          success: ~r/Auth=([a-z0-9=_\-\.]+)/i
+        }
+      }
+
       @user_agent %{
         downloader:
           "AndroidDownloadManager/6.0.1 (Linux; U; Android 6.0.1; Nexus 5X Build/MHC19Q)",
@@ -48,10 +55,12 @@ defmodule ExPlay.Request.Base do
       @defaults %{
         language:        "en_US",
         client_id:       "am-android-google",
+        has_permission:  "1",
         sdk_version:     "23",
         country_code:    "us",
         vending:         "com.android.vending",
         account_type:    "HOSTED_OR_GOOGLE",
+        source:          "android",
         service:         "androidmarket",
         content_type:    "application/x-www-form-urlencoded; charset=UTF-8",
         pre_fetch:       false,
