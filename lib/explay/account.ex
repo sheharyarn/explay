@@ -1,5 +1,5 @@
 defmodule ExPlay.Account do
-  defstruct [:email, :password, :auth_token]
+  defstruct [:email, :password, :device_id, :auth_token]
 
   @moduledoc """
   Struct representation of a Google Play user account
