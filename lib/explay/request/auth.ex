@@ -9,7 +9,9 @@ defmodule ExPlay.Request.Auth do
   @doc "Authenticates, returning a new Account instance with auth_token set"
   def authenticate!(account) do
     {:ok, token} =
-      make_auth_request!(account) |> parse_response
+      account
+      |> make_auth_request!
+      |> parse_response
 
     %{ account | auth_token: token }
   end

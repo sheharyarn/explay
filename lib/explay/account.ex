@@ -9,4 +9,6 @@ defmodule ExPlay.Account do
   def authenticated?(account) do
     is_nil(account.auth_token)
   end
+
+  defdelegate authenticate!(account), to: ExPlay.Request
 end
