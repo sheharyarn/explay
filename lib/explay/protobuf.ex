@@ -6,9 +6,8 @@ defmodule ExPlay.Protobuf do
   project. Currently no Elixir/Erlang package supports Protobuf v2.
   """
 
-  @protobuf_file "./lib/proto/googleplay.proto"
+  @protobuf_file Path.expand("../proto/googleplay.proto", __DIR__)
   @inspect_limit 10_000
-
 
 
   @doc "Decodes protobuf data from an HTTPResponse"
