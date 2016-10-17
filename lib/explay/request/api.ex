@@ -11,6 +11,7 @@ defmodule ExPlay.Request.API do
   needs an authorized account object
   """
   def package_details(account, package) do
+    get!("details", [{"doc", package}], api_headers(account).get)
   end
 
 
