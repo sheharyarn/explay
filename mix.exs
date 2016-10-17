@@ -1,13 +1,31 @@
 defmodule ExPlay.Mixfile do
   use Mix.Project
 
+  @app     :explay
+  @name    "ExPlay"
+  @version "0.1.0-alpha"
+  @github  "https://github.com/sheharyarn/#{@app}"
+
   def project do
-    [app: :explay,
-     version: "0.1.0",
-     elixir: "~> 1.3",
-     build_embedded: Mix.env == :prod,
-     start_permanent: Mix.env == :prod,
-     deps: deps()]
+    [
+      # Project
+      app:          @app,
+      version:      @version,
+      elixir:       "~> 1.2",
+      description:  description(),
+      package:      package(),
+      deps:         deps(),
+
+      # ExDoc
+      name:         @name,
+      source_url:   @github,
+      homepage_url: @github,
+      docs: [
+        main:       @name,
+        canonical:  "https://hexdocs.com/#{@app}",
+        extras:     ["README.md"]
+      ]
+    ]
   end
 
   def application do
@@ -18,7 +36,24 @@ defmodule ExPlay.Mixfile do
     [
       {:poison,     "~> 3.0"   },
       {:httpoison,  "~> 0.8.0" },
-      {:ex_utils,   git: "https://github.com/sheharyarn/ex_utils.git"}
+      {:ex_utils,   ">= 0.0.0" },
+      {:ex_doc,     ">= 0.0.0", only: :dev }
+    ]
+  end
+
+  defp description do
+    """
+    Google Play (Android Market) API implementation in Elixir
+    """
+  end
+
+  defp package do
+    [
+      name: @app,
+      maintainers: ["Sheharyar Naseer"],
+      licenses: ["MIT"],
+      files: ~w(mix.exs lib README.md),
+      links: %{"Github" => @github}
     ]
   end
 end
