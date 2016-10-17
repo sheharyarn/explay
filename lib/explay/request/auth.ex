@@ -6,14 +6,29 @@ defmodule ExPlay.Request.Auth do
   """
 
 
-  @doc "Authenticates, returning a new Account instance with auth_token set"
-  def authenticate!(account) do
-    {:ok, token} =
+  @doc "Attempts to authenticate the user, returning a new instance with auth_token set"
+  def authenticate(account) do
+    response =
       account
       |> make_auth_request!
       |> parse_response
 
-    %{ account | auth_token: token }
+    case response do
+      {:ok,    token}  -> {:ok, %{ account | auth_token: token } }
+      {:error, reason} -> {:error, reason}
+    end
+  end
+
+
+  @doc """
+  Authenticates, returning a new Account instance with auth_token if everything
+  is valid. Otherwise, raises an error.
+  """
+  def authenticate!(account) do
+    case authenticate(account) do
+      {:ok, account} -> account
+      {:error, _}    -> raise "Could not authenticate account"
+    end
   end
 
 

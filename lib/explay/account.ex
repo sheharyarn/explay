@@ -10,5 +10,7 @@ defmodule ExPlay.Account do
     !!(account.auth_token)
   end
 
-  defdelegate authenticate!(account), to: ExPlay.Request
+
+  defdelegate authenticate(account),  to: ExPlay.Request.Auth
+  defdelegate authenticate!(account), to: ExPlay.Request.Auth
 end
