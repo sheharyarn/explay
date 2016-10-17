@@ -11,7 +11,21 @@ defmodule ExPlay.Request.API do
   needs an authorized account object
   """
   def package_details(account, package) do
-    get!("details", [{"doc", package}], api_headers(account).get)
+    details =
+      get!("details", [{"doc", package}], api_headers(account).get)
+      |> ExPlay.Protobuf.decode("ResponseWrapper")
+      |> ExUtils.Map.symbolize_keys
+
+    cond do
+      !!details.payload ->
+        {:ok, details.payload.detailsResponse.docV2}
+
+      !!details.commands ->
+        {:error, details.commands.displayErrorMessage}
+
+      true ->
+        {:error, "Unknown Error"}
+    end
   end
 
 
