@@ -1,6 +1,5 @@
 {
   "name": "ExPlay",
-  "version": "0.1.0",
   "description": "Elixir Library for Google Play API",
   "author": "Sheharyar Naseer <hello@sheharyar.me> (https://sheharyar.me/)",
   "license": "MIT",
