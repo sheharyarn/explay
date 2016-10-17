@@ -79,9 +79,9 @@ defmodule ExPlay.Request.Base do
       }
 
 
-      defdelegate  get!(url, params, headers \\ []),  to: ExPlay.Request.Base, as: :get!
-      defdelegate post!(url, params, headers \\ []),  to: ExPlay.Request.Base, as: :post!
-      defdelegate encode_args(args),                  to: ExPlay.Request.Base, as: :encode_args
+      defdelegate  get!(url, params, headers \\ []),  to: ExPlay.Request.Base
+      defdelegate post!(url, params, headers \\ []),  to: ExPlay.Request.Base
+      defdelegate encode_args(args),                  to: ExPlay.Request.Base
 
       defoverridable get!: 3, post!: 3
     end
