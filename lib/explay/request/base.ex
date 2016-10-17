@@ -54,28 +54,35 @@ defmodule ExPlay.Request.Base do
 
       @defaults %{
         language:        "en_US",
-        client_id:       "am-android-google",
         has_permission:  "1",
         sdk_version:     "23",
         country_code:    "us",
         vending:         "com.android.vending",
         account_type:    "HOSTED_OR_GOOGLE",
+        host:            "android.clients.google.com",
         source:          "android",
         service:         "androidmarket",
         content_type:    "application/x-www-form-urlencoded; charset=UTF-8",
-        pre_fetch:       false,
         cache_interval:  30_000,
 
-        enabled_experiments: [
-          "cl:billing.select_add_instrument_by_default"
-        ],
+        xdfe: %{
+          no_prefetch:     true,
+          screen_width:    "320",
+          filter_level:    "3",
+          client_id:       "am-android-google",
 
-        unsupported_experiments: [
-          "nocache:billing.use_charging_poller",
-          "market_emails", "buyer_currency", "prod_baseline",
-          "checkin.set_asset_paid_app_field", "shekel_test", "content_ratings",
-          "buyer_currency_in_app", "nocache:encrypted_apk", "recent_changes"
-        ]
+          enabled_experiments: Enum.join([
+            "cl:billing.select_add_instrument_by_default"
+          ], ","),
+
+          unsupported_experiments: Enum.join([
+            "nocache:billing.use_charging_poller",
+            "market_emails", "buyer_currency", "prod_baseline",
+            "checkin.set_asset_paid_app_field", "shekel_test", "content_ratings",
+            "buyer_currency_in_app", "nocache:encrypted_apk", "recent_changes"
+          ], ",")
+        }
+
       }
 
 

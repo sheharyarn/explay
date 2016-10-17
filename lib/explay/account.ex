@@ -7,7 +7,7 @@ defmodule ExPlay.Account do
 
   @doc "Checks if Account has :auth_token present"
   def authenticated?(account) do
-    is_nil(account.auth_token)
+    !!(account.auth_token)
   end
 
   defdelegate authenticate!(account), to: ExPlay.Request
