@@ -11,6 +11,8 @@ defmodule ExPlay.Request.API do
   needs an authorized account object
   """
   def package_details(account, package) do
+    ExPlay.Account.verify_authenticated!(account)
+
     details =
       get!("details", [{"doc", package}], api_headers(account, :get))
       |> ExPlay.Protobuf.decode("ResponseWrapper")

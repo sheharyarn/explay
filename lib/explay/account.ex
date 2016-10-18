@@ -11,6 +11,15 @@ defmodule ExPlay.Account do
   end
 
 
+  @doc "Makes sure account is authenticated otherwise raises error"
+  def verify_authenticated!(account) do
+    case authenticated?(account) do
+      true  -> true
+      false -> raise "Account not authenticated!"
+    end
+  end
+
+
   defdelegate authenticate(account),  to: ExPlay.Request.Auth
   defdelegate authenticate!(account), to: ExPlay.Request.Auth
 end
