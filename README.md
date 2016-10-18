@@ -13,7 +13,7 @@ Add `explay` to your list of dependencies in `mix.exs`:
 
 ```elixir
 def deps do
-  [{:explay, ">= 0.0.0"}]
+  [{:explay, "~> 0.1.0"}]
 end
 ```
 
@@ -50,7 +50,7 @@ yarn add protobufjs
     - [ ] Related Apps
     - [ ] Categories
     - [ ] App Reviews
-    - [ ] Download App
+    - [x] Download App
     - [ ] Download App Data
 
 
