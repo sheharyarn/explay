@@ -1,10 +1,11 @@
 defmodule ExPlay.Mixfile do
   use Mix.Project
 
-  @app     :explay
-  @name    "ExPlay"
-  @version "0.1.0-alpha"
-  @github  "https://github.com/sheharyarn/#{@app}"
+  @app      :explay
+  @name     "ExPlay"
+  @version  "0.1.0-alpha"
+  @github   "https://github.com/sheharyarn/#{@app}"
+
 
   def project do
     [
@@ -49,11 +50,11 @@ defmodule ExPlay.Mixfile do
 
   defp package do
     [
-      name: @app,
-      maintainers: ["Sheharyar Naseer"],
-      licenses: ["MIT"],
-      files: ~w(mix.exs lib README.md),
-      links: %{"Github" => @github}
+      name:         @app,
+      files:        ~w(mix.exs lib README.md),
+      links:        %{"Github" => @github},
+      licenses:     ["MIT"],
+      maintainers:  ["Sheharyar Naseer"]
     ]
   end
 end

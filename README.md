@@ -43,7 +43,7 @@ yarn add protobufjs
  - [ ] Update documentation with more information and examples
  - [ ] Implement pure Erlang/Elixir Protobuf v2 solution for decoding data
  - [ ] Cover all API calls
-    - [x] Authorization
+    - [x] Authentication
     - [x] Package Details
     - [ ] Bulk Package Details
     - [ ] Search Apps

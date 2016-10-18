@@ -12,7 +12,7 @@ defmodule ExPlay.Request.API do
   """
   def package_details(account, package) do
     details =
-      get!("details", [{"doc", package}], api_headers(account).get)
+      get!("details", [{"doc", package}], api_headers(account, :get))
       |> ExPlay.Protobuf.decode("ResponseWrapper")
       |> ExUtils.Map.symbolize_keys
 
@@ -36,15 +36,20 @@ defmodule ExPlay.Request.API do
   end
 
 
-  @doc "API Specific GET requests"
-  def get!(path, params, headers),  do: super(process_url(path), params, headers)
+  @doc "API specific GET requests"
+  def get!(path, params, headers) do
+    super(process_url(path), params, headers)
+  end
 
-  @doc "API Specific POST requests"
-  def post!(path, params, headers), do: super(process_url(path), params, headers)
+
+  @doc "API specific POST requests"
+  def post!(path, params, headers) do
+    super(process_url(path), params, headers)
+  end
 
 
-  @doc "Prepare headers for api request"
-  def api_headers(account) do
+  @doc "Prepare headers depending on the type of api request"
+  def api_headers(account, type \\ :get) do
     common = [
       { "Authorization",                 "GoogleLogin auth=#{account.auth_token}"  },
       { "X-DFE-Device-Id",               account.device_id                         },
@@ -61,9 +66,10 @@ defmodule ExPlay.Request.API do
       { "X-DFE-Unsupported-Experiments", @defaults.xdfe.unsupported_experiments    }
     ]
 
-    %{
-      get:  common,
-      post: common ++ [{"Content-type",  @defaults.content_type}]
-    }
+    case type do
+      :get  -> common
+      :post -> common ++ [{"Content-type",  @defaults.content_type}]
+      _     -> raise "Unknown Request Type"
+    end
   end
 end
