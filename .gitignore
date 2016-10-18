@@ -10,12 +10,15 @@
 # Where 3rd-party dependencies like ExDoc output generated docs.
 /doc
 
+# Temp dir
+/tmp
+/temp
+
+# Yarn / Node Modules
+/node_modules
+
 # If the VM crashes, it generates a dump, let's ignore it too.
 erl_crash.dump
 
 # Also ignore archive artifacts (built via "mix archive.build").
 *.ez
-
-# Yarn / Node Modules
-node_modules/
-
