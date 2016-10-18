@@ -15,18 +15,70 @@ defmodule ExPlay.Request.API do
 
     details =
       get!("details", [{"doc", package}], api_headers(account, :get))
-      |> ExPlay.Protobuf.decode("ResponseWrapper")
+      |> ExPlay.Protobuf.decode
       |> ExUtils.Map.symbolize_keys
+      |> handle_response
 
+    case details do
+      {:ok,    details} -> {:ok,    details.detailsResponse.docV2}
+      {:error, message} -> {:error, message}
+    end
+  end
+
+
+
+  @doc """
+  Attempts to retrieve APK download information
+  """
+  def package_download_info(account, package, version \\ nil) do
+    ExPlay.Account.verify_authenticated!(account)
+
+    data =
+      post!("purchase", download_params(package, version), api_headers(account, :post))
+      |> ExPlay.Protobuf.decode
+      |> ExUtils.Map.symbolize_keys
+      |> handle_response
+
+    case data do
+      {:ok, data} ->
+        resp = data.buyResponse
+        cond do
+          !!resp.purchaseStatusResponse -> {:ok, resp.purchaseStatusResponse.appDeliveryData}
+          !!resp.checkoutinfo           -> {:error, "App not free"}
+          true                          -> {:error, "Cannot parse download data"}
+        end
+      {:error, message} ->
+        {:error, message}
+    end
+  end
+
+
+
+  @doc "Parses Google API request response to check if it was successful"
+  def handle_response(response) do
     cond do
-      !!details.payload ->
-        {:ok, details.payload.detailsResponse.docV2}
+      !!response.payload ->
+        {:ok, response.payload}
 
-      !!details.commands ->
-        {:error, details.commands.displayErrorMessage}
+      !!response.commands ->
+        {:error, response.commands.displayErrorMessage}
 
       true ->
         {:error, "Unknown Error"}
+    end
+  end
+
+
+  @doc "Prepares body for Download information request"
+  def download_params(package, version_code \\ nil) do
+    body = [
+      { "doc", package },
+      { "ot",  "1"     }
+    ]
+
+    case version_code do
+      nil -> body
+      _   -> body ++ [{"vc", version_code}]
     end
   end
 
