@@ -10,13 +10,18 @@ defmodule ExPlay.Protobuf do
   @inspect_limit 10_000
 
 
-  @doc "Decodes protobuf data from an HTTPResponse"
+  @doc """
+  Decodes protobuf data from a Protobuf binary or HTTPResponse body,
+  according to the specified message type.
+
+  Message type defaults to `ResponseWrapper`.
+  """
+  def decode(data, type \\ "ResponseWrapper")
+
   def decode(%HTTPoison.Response{body: body}, type) do
     decode(body, type)
   end
 
-
-  @doc "Decodes protobuf data according to the specified type"
   def decode(data, type) do
     binary_list = :binary.bin_to_list(data)
 
