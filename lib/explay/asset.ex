@@ -33,7 +33,7 @@ defmodule ExPlay.Asset do
     File.mkdir_p!(Path.dirname(path))
     File.write!(path, binary)
 
-    %{ asset | path: path}
+    %{ asset | path: path }
   end
 
 
