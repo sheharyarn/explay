@@ -39,7 +39,7 @@ defmodule ExPlay.Asset do
 
   @doc "Fetches APK downloads details using authenticated account and then downloads it to disk"
   def download!(account, {package, version}, path) do
-    {:ok, info} = ExPlay.Request.API.package_download_info(account, package, version)
+    {:ok, info} = ExPlay.Request.API.package_download_info(account, {package, version})
 
     info
     |> to_asset

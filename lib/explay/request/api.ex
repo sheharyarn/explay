@@ -30,7 +30,7 @@ defmodule ExPlay.Request.API do
   @doc """
   Attempts to retrieve APK download information
   """
-  def package_download_info(account, package, version \\ nil) do
+  def package_download_info(account, {package, version}) do
     ExPlay.Account.verify_authenticated!(account)
 
     data =
@@ -50,6 +50,10 @@ defmodule ExPlay.Request.API do
       {:error, message} ->
         {:error, message}
     end
+  end
+
+  def package_download_info(account, package) when is_binary(package) do
+    package_download_info(account, {package, nil})
   end
 
 
