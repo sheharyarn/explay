@@ -3,7 +3,7 @@ defmodule ExPlay.Mixfile do
 
   @app      :explay
   @name     "ExPlay"
-  @version  "0.1.1"
+  @version  "0.1.2"
   @github   "https://github.com/sheharyarn/#{@app}"
 
 
@@ -36,7 +36,7 @@ defmodule ExPlay.Mixfile do
   defp deps do
     [
       {:poison,     "~> 3.0"   },
-      {:httpoison,  "~> 0.8.0" },
+      {:httpoison,  "~> 0.9.2" },
       {:ex_utils,   ">= 0.0.0" },
       {:ex_doc,     ">= 0.0.0", only: :dev }
     ]
