@@ -23,7 +23,7 @@ defmodule ExPlay.Mixfile do
       homepage_url: @github,
       docs: [
         main:       @name,
-        canonical:  "https://hexdocs.com/#{@app}",
+        canonical:  "https://hexdocs.pm/#{@app}",
         extras:     ["README.md"]
       ]
     ]
