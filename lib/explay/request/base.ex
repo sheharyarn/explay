@@ -19,9 +19,7 @@ defmodule ExPlay.Request.Base do
 
   @doc "Encodes body args into k=v format"
   def encode_args(args) do
-    Enum.reduce args, "", fn ({k,v}, body) ->
-      body <> to_string(k) <> "=" <> URI.encode_www_form(to_string v) <> "&"
-    end
+    URI.encode_query(args)
   end
 
 
