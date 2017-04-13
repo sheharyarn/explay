@@ -27,7 +27,11 @@ defmodule ExPlay.Asset do
   @doc "Downloads Google Play asset to disk"
   def download!(%ExPlay.Asset{} = asset, path) do
     %HTTPoison.Response{status_code: 200, body: binary} =
-      HTTPoison.get!(asset.url, %{}, hackney: [cookie: [asset.cookies]])
+      HTTPoison.get!(asset.url, %{},
+        follow_redirect: true,
+        max_redirect: 5,
+        hackney: [cookie: [asset.cookies]]
+      )
 
     path = Path.expand(path)
     File.mkdir_p!(Path.dirname(path))
