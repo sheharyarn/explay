@@ -13,7 +13,7 @@ Add `explay` to your list of dependencies in `mix.exs`:
 
 ```elixir
 def deps do
-  [{:explay, "~> 0.1.3"}]
+  [{:explay, "~> 0.1.4"}]
 end
 ```
 
