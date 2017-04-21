@@ -7,7 +7,7 @@ defmodule ExPlay.Protobuf do
   """
 
   @protobuf_file Path.expand("../proto/googleplay.proto", __DIR__)
-  @inspect_limit 10_000
+  @inspect_limit :infinity
 
 
   @doc """
