@@ -16,7 +16,7 @@ defmodule ExPlay.Request.API do
     details =
       get!("details", [{"doc", package}], api_headers(account, :get))
       |> ExPlay.Protobuf.decode
-      |> ExUtils.Map.symbolize_keys
+      |> ExUtils.Map.symbolize_keys(deep: true)
       |> handle_response
 
     case details do
@@ -36,7 +36,7 @@ defmodule ExPlay.Request.API do
     data =
       post!("purchase", download_params(package, version), api_headers(account, :post))
       |> ExPlay.Protobuf.decode
-      |> ExUtils.Map.symbolize_keys
+      |> ExUtils.Map.symbolize_keys(deep: true)
       |> handle_response
 
     case data do

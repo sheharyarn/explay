@@ -37,7 +37,7 @@ defmodule ExPlay.Mixfile do
     [
       {:poison,     "~> 3.0"   },
       {:httpoison,  "~> 0.9.2" },
-      {:ex_utils,   ">= 0.0.0" },
+      {:ex_utils,   ">= 0.1.7" },
       {:ex_doc,     ">= 0.0.0", only: :dev }
     ]
   end
